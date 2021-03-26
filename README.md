@@ -1,0 +1,1 @@
+Proyecto desarrollado en Django, mas adelante seguiremos dando mas detalles
