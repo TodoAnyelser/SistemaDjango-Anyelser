@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title%}
+            Login
+{% endblock %}
+
+{% block menu%}{% endblock %}
+
+{% block contenidoPrincipal %}
+
+<br>
+
+<h1>Iniciar sesión</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <button type="submit">Login</button>
+</form>
+
+<hr />
+<h3><a href="/register">Registrar usuario</a></h3>
+
+
+
+{% endblock %}
+
+{% block footer %}{% endblock%}
+
+
+    
+
+

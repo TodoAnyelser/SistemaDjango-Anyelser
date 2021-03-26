@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title%}
+            Mi Perfil
+{% endblock %}
+
+{% block contenidoPrincipal %}
+
+<br>
+
+<h1>Usuario : {{MiUsuario.username}}</h1>
+
+
+{% if MiUsuario.imagen_perfil %}
+    <img src="{{MiUsuario.imagen_perfil.url}}" alt="" width="10%">
+{% endif %}
+
+<br>
+<h3>Nombre: {{MiUsuario.username}}</h3>
+<h3>Telefono: {{MiUsuario.telefono}}</h3>
+<h3>Biografia: {{MiUsuario.biografia}}</h3>
+<h3>Mi Url: {{MiUsuario.url_perfil}}{{MiUsuario.id}}</h3>
+<h3>{{PerfilPersonal}}</h3>
+{% if PerfilPersonal %}
+<h3><a href="{% url 'usuarios:editar_perfil' id_perfil=MiUsuario.id  %}">Editar</a></li></h3>
+{% else %}
+
+{% endif%}
+
+
+
+
+
+
+
+
+{% endblock %}

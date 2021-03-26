@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title%}
+            Editar
+{% endblock %}
+
+{% block contenidoPrincipal %}
+
+<p>
+    Bienvenido <b>{{request.user.username}}</b>
+</p>
+
+<h1>Editar</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ formularioPublicaciones.as_p }}
+    
+    <button type="submit">Editar</button>
+</form>
+
+
+
+{% endblock %}

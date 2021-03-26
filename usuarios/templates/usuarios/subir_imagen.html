@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title%}
+            Subiendo Imagen
+{% endblock %}
+
+{% block contenidoPrincipal %}
+
+<h1>Subiendo Imagen</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    
+    <button type="submit">Subir</button>
+</form>
+
+{% endblock %}

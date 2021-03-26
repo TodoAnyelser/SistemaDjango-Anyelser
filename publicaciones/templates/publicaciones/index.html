@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title%}
+            Home
+{% endblock %}
+
+{% block contenidoPrincipal %}
+
+<h2>
+    Bienvenido <b>{{request.user}}</b> has realizado {{TotalPublicaciones}} {{palabraPublicacion}} el dia de hoy
+</h2>
+
+
+{% if formularioPublicaciones == None %}
+    <h1>No puedes hacer mas publicaciones por el dia de hoy</h1>
+{% else %}
+
+    <h1>¿En que estas pensando hoy?</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in formularioPublicaciones %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }} {{ field }}
+                {% if field.help_text %}
+                {% if field.is_hidden %}
+                    <p>Esta campo deberia estar oculto</p>
+                {% else %}
+                {% endif%}
+                <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        
+        <button type="submit">Publicar</button>
+    </form>
+{% endif%}
+
+
+<br><br>
+<h2>Publicaciones Recientes</h2>
+
+<ul>
+    {% if publicaciones %}
+        {% for publicacion in publicaciones %}
+            <li>Publicacion: {{ publicacion.texto }}</li>
+            <li>Autor: {{ publicacion.autor }}</li>
+            <li>Archivo Subido: {{ publicacion.archivo }}</li>
+            <li><a href="{% url 'usuarios:perfil_usuario' id_perfil=publicacion.autor.id %}">Ver perfil del autor</a></li>
+            <li>Creado el dia: {{ publicacion.fecha_creacion }}</li>
+            <li><a href="{% url 'publicaciones:editar_publicaciones'  id_publicacion=publicacion.id %}">Editar</a></li>
+            <li><a href="{% url 'publicaciones:borrar_Publicaciones'  id_publicacion=publicacion.id %}">Borrar</a></li>
+            <br>
+        {% endfor %}
+    {% else %}
+
+        <h3>No existen publicaciones actualmente</h3>
+    
+        {% endif %}
+    </ul>
+
+{% endblock %}
